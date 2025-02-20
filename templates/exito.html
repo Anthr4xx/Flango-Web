@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compra Exitosa</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: auto;
+        }
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+        img {
+            width: 100px;
+            height: auto;
+        }
+        .header-row {
+            font-size: 22px;
+            padding: 15px;
+            background-color: #77633c;
+            color: white;
+            text-align: center;
+        }
+        .product-row {
+            background-color: #ffeec6;
+            color: black;
+            font-weight: bold;
+            height: 50px;
+        }
+        .total-row {
+            background-color: #b7985b;
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+        }
+        /* Estilos del botón */
+        .out-button {
+            font-size: 22px;
+            padding: 15px 40px;
+            border-radius: 10px;
+            background-color: #8b7445;
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto;
+            text-align: center;
+            text-decoration: none;
+        }
+        .out-button:hover {
+            background-color: #624c1f;
+        }
+        .pdf-button {
+            font-size: 22px;
+            padding: 15px 40px;
+            border-radius: 10px;
+            background-color: #dcad51;
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto;
+            text-align: center;
+            text-decoration: none;
+        }
+        .pdf-button:hover {
+            background-color: #ffaf10;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">¡Gracias por tu compra, {{ nombre }} {{ apellido }}!</h1>
+
+    <h1>Tu pedido ha sido procesado exitosamente:</h1><br>
+    <table border="1" width="50%">
+        <tr class="header-row">
+            <th>Imagen</th>
+            <th>Producto</th>
+            <th>Precio</th>
+        </tr>
+        {% for product in carrito %}
+        <tr class="product-row">
+            <td><img src="{{ product.image }}" alt="{{ product.name }}" width="150"></td>
+            <td><strong>{{ product.name }}</strong></td>
+            <td>${{ "{:,.2f}".format(product.price) }}</td>
+        </tr>
+        {% endfor %}
+        <tr class="total-row">
+            <td colspan="2" style="text-align: right; font-weight: bold;">Total:</td>
+            <td style="font-weight: bold;">${{ total_price }}</td>
+        </tr>
+    </table><br><br><br>
+    
+
+    <h2>Detalles del Envío:</h2>
+    <p><strong>Cliente:</strong> {{ nombre_completo }}</p>
+    <p><strong>Teléfono:</strong> {{ telefono }}</p>
+    <p><strong>Dirección de envío:</strong> {{ direccion }}</p>
+    <p>────────────────────────────────</p>
+    <p><strong>Tarjeta utilizada:</strong> {{ tarjeta_censurada }}</p>
+    <p>────────────────────────────────</p>
+    <p><strong>Recibo enviado a:</strong> {{ email }}</p>
+
+    <button class="pdf-button" onclick="generarPDF()">Descargar Factura (PDF)</button>
+
+    <a href="/" class="out-button">Volver a la Página de Inicio</a>
+
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+<script>
+function generarPDF() {
+    const elemento = document.body;
+    html2pdf(elemento, {
+        margin: 10,
+        filename: 'Factura de compra.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    });
+}
+</script>
+</html>

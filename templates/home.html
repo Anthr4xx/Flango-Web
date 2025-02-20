@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Virtual</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h1 {
+            font-size: 48px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .big-button {
+            font-size: 28px;
+            padding: 20px 50px;
+            border-radius: 12px;
+            background-color: #8b7445;
+            color: white;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .big-button:hover {
+            background-color: #624c1f;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <h1>¡Bienvenido a la tienda!</h1>
+    <a href="{{ url_for('productos') }}" class="big-button">Ingresar a la tienda</a>
+</body>
+</html>

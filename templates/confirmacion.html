@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumen del Carrito</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: auto;
+        }
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+        img {
+            width: 100px;
+            height: auto;
+        }
+        .header-row {
+            font-size: 22px;
+            padding: 15px;
+            background-color: #77633c;
+            color: white;
+            text-align: center;
+        }
+        .product-row {
+            background-color: #ffeec6;
+            color: black;
+            font-weight: bold;
+            height: 50px;
+        }
+        .total-row {
+            background-color: #b7985b;
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+        }
+        .delete-btn {
+            font-size: 16px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .delete-btn:hover {
+            background-color: darkred;
+        }
+        .blue-button {
+            font-size: 22px;
+            padding: 15px 40px;
+            border-radius: 10px;
+            background-color: #8b7445;
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+        }
+        .blue-button:hover {
+            background-color: #624c1f;
+        }
+        .green-button {
+            font-size: 22px;
+            padding: 15px 40px;
+            border-radius: 10px;
+            background-color: rgb(91, 182, 91);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+        }
+        .green-button:hover {
+            background-color: green;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Resumen de tu carrito:</h1><br>
+    <table border="1" width="50%">
+        <tr class="header-row">
+            <th>Imagen</th>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th></th>
+        </tr>
+        {% for product in carrito %}
+        <tr class="product-row">
+            <td><img src="{{ product.image }}" alt="{{ product.name }}" width="150"></td>
+            <td><strong>{{ product.name }}</strong></td>
+            <td>${{ "{:,.2f}".format(product.price) }}</td>
+            <td>
+                <form method="POST" action="{{ url_for('eliminar_producto') }}">
+                    <input type="hidden" name="producto_eliminar" value="{{ product.name }}">
+                    <button type="submit" class="delete-btn">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        <!-- Fila para el total -->
+        <tr class="total-row">
+            <td colspan="2" style="text-align: right;">Total:</td>
+            <td>${{ total_price }}</td>
+            <td></td>
+        </tr>
+    </table><br><br><br>
+    
+    <form method="GET" action="{{ url_for('productos') }}">
+        <button type="submit" class="green-button">Añadir más productos</button>
+    </form>
+    
+    <form method="POST" action="{{ url_for('confirmacion') }}">
+        <button type="submit" class="blue-button">Confirmar productos y proceder a pago</button>
+    </form>
+    
+</body>
+</html>

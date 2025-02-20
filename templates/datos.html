@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingresar Datos</title>
+    <style>
+        button {
+            font-size: 22px;
+            padding: 15px 40px;
+            border-radius: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<script>
+    function formatearTarjeta(input) {
+        let valor = input.value.replace(/\D/g, '');
+        valor = valor.substring(0, 16);
+    
+        let nuevoValor = valor.replace(/(\d{4})/g, '$1 ').trim();
+    
+        input.value = nuevoValor;
+    }
+    </script>
+    
+<body>
+
+    <h1>Ingresar datos de contacto:</h1><br>
+
+    <form method="POST" action="{{ url_for('datos') }}">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required><br><br>
+
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido" required><br><br>
+
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono" name="telefono" required><br><br>
+
+        <label for="direccion">Dirección de envío:</label>
+        <input type="text" id="direccion" name="direccion" required><br><br>
+    
+        <label for="direccion">Correo electrónico:</label>
+        <input type="text" id="email" name="email"><br><br><br>
+
+
+        <h1>Ingresar datos de pago:</h1><br>
+
+        <label for="numero_tarjeta">Número de Tarjeta:</label>
+        <input type="text" id="numero_tarjeta" name="numero_tarjeta" maxlength="19" required placeholder="xxxx xxxx xxxx xxxx" oninput="formatearTarjeta(this)"><br><br>
+
+        <label for="nombre_titular">Nombre del Titular:</label>
+        <input type="text" id="nombre_titular" name="nombre_titular" required><br><br>
+
+        <label for="fecha_vencimiento">Fecha de Vencimiento (MM/YY):</label>
+        <input type="text" id="fecha_vencimiento" name="fecha_vencimiento" maxlength="5" required placeholder="MM/YY"><br><br>
+
+        <label for="cvv">CVV:</label>
+        <input type="password" id="cvv" name="cvv" maxlength="3" pattern="\d{3}" required placeholder="123"><br><br>
+
+
+        <button type="submit">Finalizar Compra</button>
+    </form>
+
+</body>
+</html>
