@@ -29,25 +29,19 @@ Este proyecto puede instalarse utilizando Pipenv o pip con venv.
 
    `pip install pipenv`
 
-2. Clonar el repositorio del proyecto:
+2. Instalar las dependencias:
 
-   `git clone` https://github.com/Anthr4xx/Flango-Web.git
+   `pipenv install --deploy`
 
-
-3. Instalar las dependencias:
-
-   `pipenv install`
-
-
-4. Activar el entorno virtual:
+3. Activar el entorno virtual:
 
    `pipenv shell`
 
-5. Ejecutar la aplicación:
+4. Ejecutar la aplicación:
 
    `python app.py`
 
-6. Acceder a la aplicación en el navegador:
+5. Acceder a la aplicación en el navegador:
 
      `http://127.0.0.1:5000/`
 
@@ -55,27 +49,23 @@ Este proyecto puede instalarse utilizando Pipenv o pip con venv.
 
 ### Opcion 2: Usando pip y venv
 
-1. Clonar el repositorio del proyecto:
-
-   `git clone` https://github.com/Anthr4xx/Flango-Web.git
-
-2. Crear un entorno virtual:
+1. Crear un entorno virtual:
 
    `python -m venv venv`
 
-3. Activar el entorno virtual:
+2. Activar el entorno virtual:
 
     ` venv\Scripts\activate`
    
-4. Instalar las dependencias:
+3. Instalar las dependencias:
 
    `pip install -r requirements.txt`
 
-5. Ejecutar la aplicación:
+4. Ejecutar la aplicación:
 
    `python app.py`
 
-6. Acceder a la aplicación en el navegador:
+5. Acceder a la aplicación en el navegador:
 
    `http://127.0.0.1:5000/`
 
