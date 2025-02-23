@@ -29,6 +29,18 @@
     
         input.value = nuevoValor;
     }
+
+function formatearFecha(input) {
+    let valor = input.value.replace(/\D/g, '');
+    valor = valor.substring(0, 4);
+
+    if (valor.length > 2) {
+        nuevoValor = valor.slice(0, 2) + '/' + valor.slice(2);
+
+    input.value = nuevoValor;
+    }
+    }
+
     </script>
     
 <body>
@@ -61,7 +73,7 @@
         <input type="text" id="nombre_titular" name="nombre_titular" required><br><br>
 
         <label for="fecha_vencimiento">Fecha de Vencimiento (MM/YY):</label>
-        <input type="text" id="fecha_vencimiento" name="fecha_vencimiento" maxlength="5" required placeholder="MM/YY"><br><br>
+        <input type="text" id="fecha_vencimiento" name="fecha_vencimiento" maxlength="5" required placeholder="MM/YY" oninput="formatearFecha(this)"><br><br>
 
         <label for="cvv">CVV:</label>
         <input type="password" id="cvv" name="cvv" maxlength="3" pattern="\d{3}" required placeholder="123"><br><br>
